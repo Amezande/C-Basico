@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
+#include <stdio.h>			//Amacende Barajas Oscar Axel 2022350413
+#include <string.h>			//Versión 0.1.2
+#include <stdbool.h>		//Equipo5
 
 // Funciones para detectar elementos
 bool contieneCadena(const char a[]);
@@ -10,6 +10,8 @@ bool contieneTabulacion(const char a[]);
 bool contienePrintf(const char a[]);
 bool contieneParentesis(const char a[]);
 bool contienePuntoYComa(const char a[]);
+bool contieneComentarioUnaLinea(const char a[]);
+bool contieneComentarioMultipleLinea(const char a[]);
 
 int main() {
 	
@@ -49,6 +51,14 @@ int main() {
     	if (contienePuntoYComa(cad)) {
         	printf(" Contiene punto y coma ';'\n");
     	}
+    	
+    	if (contieneComentarioUnaLinea(cad)) {
+    		printf(" Contiene un comentario de una sola linea (//)\n");
+		}
+
+		if (contieneComentarioMultipleLinea(cad)) {
+    	printf(" Contiene un comentario de multiples lineas (/* */)\n");
+		}
 
     	//return 0;
 	} while (1);
@@ -87,4 +97,14 @@ bool contieneParentesis(const char a[]) {
 // Detecta punto y coma
 bool contienePuntoYComa(const char a[]) {
     return strchr(a, ';') != NULL;
+}
+
+// Detecta comentario de una sola línea (//)
+bool contieneComentarioUnaLinea(const char a[]) {
+    return strstr(a, "//") != NULL;
+}
+
+// Detecta comentario de múltiples líneas (/* ... */)
+bool contieneComentarioMultipleLinea(const char a[]) {
+    return strstr(a, "/*") != NULL && strstr(a, "*/") != NULL;
 }
